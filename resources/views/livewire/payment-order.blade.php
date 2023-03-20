@@ -2,7 +2,8 @@
     <div class="grid grid-cols-5 gap-6 container-menu py-8">
         <div class="col-span-3">
             <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
-                <p class="text-gray-700 uppercase"><span class="font-semibold">Número de Orden:</span> {{ $order->id }}</p>
+                <p class="text-gray-700 uppercase"><span class="font-semibold">Número de Orden:</span> {{ $order->id }}
+                </p>
             </div>
 
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
@@ -94,27 +95,28 @@
                         </div>
                     </div>
 
-                    <div id="paypal-button-container"></div>
+                    <div id="paypal-button-container "></div>
                 </div>
             </div>
         </div>
     </div>
 
     @push('scripts')
-        <script src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=EUR"></script>
+        <script
+            src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=EUR"></script>
         <script>
             paypal.Buttons({
-                createOrder: function(data, actions) {
+                createOrder: function (data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value:  "{{ $order->total }}"
+                                value: "{{ $order->total }}"
                             }
                         }]
                     });
                 },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(orderData) {
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (orderData) {
                         Livewire.emit('payOrder');
                     });
                 }
