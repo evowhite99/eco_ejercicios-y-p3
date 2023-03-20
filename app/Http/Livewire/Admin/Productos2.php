@@ -4,13 +4,21 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Brand;
+use App\Models\Category;
 use Livewire\WithPagination;
 
 class Productos2 extends Component
 {
     use WithPagination;
 
+    //filtros
     public $search;
+    public $selectedCategory;
+    public $selectedBrand;
+    public $selectedPrice;
+    public $selectedDate;
+
     //ordenar
     public $sortField = 'name';
     public $sortDirection = 'asc';
@@ -52,10 +60,30 @@ class Productos2 extends Component
     }
 
     public function render() {
-        $products = Product::where('name', 'LIKE', "%{$this->search}%")
+        $query = Product::query();
+        if ($this->selectedCategory) {
+            $query->whereHas('subcategory.category', function ($query) {
+                $query->where('id', $this->selectedCategory);
+            });
+        }
+        if ($this->selectedBrand) {
+            $query->whereHas('brand', function ($query) {
+                $query->where('brand_id', $this->selectedBrand);
+            });
+        }
+        if ($this->selectedPrice) {
+            $query->where('price', $this->selectedPrice);
+        }
+        if ($this->selectedDate) {
+            $query->whereDate('created_at', $this->selectedDate);
+        }
+        $products = $query
+            ->where('name', 'LIKE', "%{$this->search}%")
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->pagination);
         return view('livewire.admin.productos2', compact('products'), [
+                'categories' => Category::all(),
+                'brands' => Brand::all(),
                 'showImage' => $this->showImage,
                 'showName' => $this->showName,
                 'showCategory' => $this->showCategory,

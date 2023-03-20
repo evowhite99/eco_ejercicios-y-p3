@@ -19,6 +19,38 @@
                          placeholder="Introduzca el nombre del producto a buscar"/>
         </div>
 
+        <div class="form-group">
+            <label for="category">Categoría:</label>
+            <select wire:model="selectedCategory" id="category" class="form-control">
+                <option value="">Todas las categorías</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }} ">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="brand">Marca:</label>
+            <select wire:model="selectedBrand" id="brand" class="form-control">
+                <option value="">Todas las categorías</option>
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio:</label>
+            <select wire:model="selectedPrice" id="price" class="form-control">
+                <option value="">Todos los precios</option>
+                <option value="19.99" dusk="filtrarPrecio1">19.99</option>
+                <option value="49.99" dusk="filtrarPrecio2">49.99</option>
+                <option value="99.99" dusk="filtrarPrecio3">99.99</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="selectedDate">Fecha de Creación:</label>
+            <input type="date" wire:model="selectedDate" id="selectedDate" class="form-control">
+        </div>
+
         <div class="font-bold bg-yellow-200">
             ORDENAR ASCENDENTE/DESCENDENTE
         </div>
