@@ -11,6 +11,9 @@ class Productos2 extends Component
     use WithPagination;
 
     public $search;
+    //ordenar
+    public $sortField = 'name';
+    public $sortDirection = 'asc';
     //paginar
     public $pagination = 10;
 
@@ -31,8 +34,26 @@ class Productos2 extends Component
         $this->resetPage();
     }
 
+    //ordenar
+    public function sortBy($field) {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            if ($field === 'subcategory.category.name') {
+                $this->sortField = 'subcategory_id';
+                $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+            } else if ($field === 'brand_id.name') {
+                $this->sortField = 'brand_id';
+                $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                $this->sortField = $field;
+            }
+        }
+    }
+
     public function render() {
         $products = Product::where('name', 'LIKE', "%{$this->search}%")
+            ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->pagination);
         return view('livewire.admin.productos2', compact('products'), [
                 'showImage' => $this->showImage,
