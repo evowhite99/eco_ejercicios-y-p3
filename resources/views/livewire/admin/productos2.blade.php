@@ -16,7 +16,7 @@
             <x-jet-input class="w-full"
                          wire:model="search"
                          type="text"
-                         placeholder="Introduzca el nombre del producto a buscar"/>
+                         placeholder="Introduzca el nombre del producto a buscar" id="buscador"/>
         </div>
 
         <div class="form-group">
@@ -56,27 +56,27 @@
         </div>
         <th scope="col">
             <button type="button" class="bg-green-200 font-bold">
-                <a href="#" wire:click="sortBy('name')">Nombre</a>
+                <a href="#" wire:click="sortBy('name')" dusk="ordenarNombre">Nombre</a>
             </button>
         </th>
         <th scope="col">
             <button type="button" class="bg-green-200 font-bold">
 
-                <a href="#" wire:click="sortBy('price')">Precio</a>
-            </button>
-
-        </th>
-        <th scope="col">
-            <button type="button" class="bg-green-200 font-bold">
-
-                <a href="#" wire:click="sortBy('subcategory.category.name')">Categoría</a>
+                <a href="#" wire:click="sortBy('price')" dusk="ordenarPrecio">Precio</a>
             </button>
 
         </th>
         <th scope="col">
             <button type="button" class="bg-green-200 font-bold">
 
-                <a href="#" wire:click="sortBy('brand_id.name')">Marca</a>
+                <a href="#" wire:click="sortBy('subcategory.category.name')" dusk="ordenarCategoria">Categoría</a>
+            </button>
+
+        </th>
+        <th scope="col">
+            <button type="button" class="bg-green-200 font-bold">
+
+                <a href="#" wire:click="sortBy('brand_id.name')" dusk="ordenarMarca">Marca</a>
             </button>
 
         </th>
@@ -90,29 +90,29 @@
                 <th>
                     <label for="showName">Nombre:</label>
                     <select id="showName" wire:model="showName">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showName1">Mostrar</option>
+                        <option value=0 dusk="showName0">Ocultar</option>
                     </select>
                 </th>
                 <th>
                     <label for="showCategory">Categorias:</label>
                     <select id="showCategory" wire:model="showCategory">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showCategory1">Mostrar</option>
+                        <option value=0 dusk="showCategory0">Ocultar</option>
                     </select>
                 </th>
                 <th>
                     <label for="showStatus">Estado:</label>
                     <select id="showStatus" wire:model="showStatus">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showStatus1">Mostrar</option>
+                        <option value=0 dusk="showStatus0">Ocultar</option>
                     </select>
                 </th>
                 <th>
                     <label for="showPrice">Precio:</label>
                     <select id="showPrice" wire:model="showPrice">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showPrice1">Mostrar</option>
+                        <option value=0 dusk="showPrice0">Ocultar</option>
                     </select>
                 </th>
             </tr>
@@ -120,38 +120,38 @@
                 <th>
                     <label for="showEdit">Editar:</label>
                     <select id="showEdit" wire:model="showEdit">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showEdit1">Mostrar</option>
+                        <option value=0 dusk="showEdit0">Ocultar</option>
                     </select>
                 </th>
 
                 <th>
                     <label for="showBrand">Marca:</label>
                     <select id="showBrand" wire:model="showBrand">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showBrand1">Mostrar</option>
+                        <option value=0 dusk="showBrand0">Ocultar</option>
                     </select>
                 </th>
 
                 <th>
                     <label for="showSold">Vendidos:</label>
                     <select id="showSold" wire:model="showSold">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showSold1">Mostrar</option>
+                        <option value=0 dusk="showSold0">Ocultar</option>
                     </select>
                 </th>
                 <th>
                     <label for="showStock">Stock:</label>
                     <select id="showStock" wire:model="showStock">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showStock1">Mostrar</option>
+                        <option value=0 dusk="showStock0">Ocultar</option>
                     </select>
                 </th>
                 <th>
                     <label for="showCreated">Fecha:</label>
                     <select id="showCreated" wire:model="showCreated">
-                        <option value=1>Mostrar</option>
-                        <option value=0>Ocultar</option>
+                        <option value=1 dusk="showCreated1">Mostrar</option>
+                        <option value=0 dusk="showCreated0">Ocultar</option>
                     </select>
                 </th>
             </tr>
@@ -302,12 +302,12 @@
             </table>
             <label for="pagination">Mostrar:</label>
             <select name="pagination" id="pagination" class="form-control" wire:model="pagination">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+                <option value="5" dusk="paginas5">5</option>
+                <option value="10" dusk="paginas10">10</option>
+                <option value="15" dusk="paginas15">15</option>
+                <option value="25" dusk="paginas25">25</option>
+                <option value="50" dusk="paginas50">50</option>
+                <option value="100" dusk="paginas100">100</option>
             </select>
         @else
             <div class="px-6 py-4">
