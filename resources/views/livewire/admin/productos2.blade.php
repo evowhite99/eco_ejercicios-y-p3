@@ -43,7 +43,7 @@
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Precio
                     </th>
-                    
+
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -84,6 +84,15 @@
                 @endforeach
                 </tbody>
             </table>
+            <label for="pagination">Mostrar:</label>
+            <select name="pagination" id="pagination" class="form-control" wire:model="pagination">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
         @else
             <div class="px-6 py-4">
                 No existen productos coincidentes

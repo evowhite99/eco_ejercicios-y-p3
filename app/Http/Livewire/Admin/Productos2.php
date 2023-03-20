@@ -11,16 +11,17 @@ class Productos2 extends Component
     use WithPagination;
 
     public $search;
+    public $pagination = 10;
 
-    public function updatingSearch2() {
+
+    public function updatingSearch() {
         $this->resetPage();
     }
 
     public function render() {
-        $products = Product::where('name', 'LIKE', "%{$this->search}%")->paginate(10);
+        $products = Product::where('name', 'LIKE', "%{$this->search}%")
+            ->paginate($this->pagination);
         return view('livewire.admin.productos2', compact('products'))
             ->layout('layouts.admin');
     }
-
-
 }
